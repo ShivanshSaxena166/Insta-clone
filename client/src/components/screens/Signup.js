@@ -24,7 +24,7 @@ const SIGNIN =()=>{
   
   </button>
         <h5>
-            <Link to="/signup">Already have an Account</Link>
+            <Link to="/login">Already have an Account</Link>
         </h5>
 
       </div>
