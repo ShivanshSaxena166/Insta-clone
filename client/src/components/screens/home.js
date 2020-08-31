@@ -64,7 +64,7 @@ const HOME =()=>{
     <img src="https://images.unsplash.com/photo-1512850183-6d7990f42385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" />
 </div>
 <div className="card-content">
-<i class="material-icons">favorite</i>
+<i className="material-icons">favorite</i>
 
     <h6>
         title
