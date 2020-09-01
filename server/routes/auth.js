@@ -19,14 +19,14 @@ router.post('/signup',(req,res)=>{
     if(!email||!password||!name)
     {
         
-        res.status(422).json({error:"please add all information"})
+        return res.status(422).json({error:"please add all information"})
     }
  
 User.findOne({email:email})
 .then((savedUser)=>{
     if(savedUser){
 
-        res.status(422).json({error:"user is already exist"})
+      return  res.status(422).json({error:"user is already exist"})
     }
     bcrypt.hash(password,14)
     .then(hashedpassword=>{
@@ -54,7 +54,7 @@ router.post('/signin',(req,res)=>{
     const {email,password}= req.body
     if(!email||!password)
     {
-        res.status(422).json({error:"please add email or password"}
+       return res.status(422).json({error:"please add email or password"}
         )
     }
     User.findOne({email:email})

@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 import M from 'materialize-css'
 const SIGNIN =()=>{
+    const history = useHistory()
     const [name,setname]= useState("")
     const [password,setpassword]=useState("")
     const [email,setemail]= useState("")
@@ -12,18 +13,23 @@ const SIGNIN =()=>{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                name:"shivansh",
-                password:"h",
-                email:"h"
+                name:name,
+                password:password,
+                email:email
             })
 
         } )
-        .then(res=>res.json)
+        .then(res=>res.json())
         .then(data=>{
            if(data.error)
            {
-               M.toast({html:data.error})
+               M.toast({html:data.error,classes:"#c62828 red darken-3"})
            }
+           else
+           {
+              M.toast({html:data.message,classes:"#1b5e20 green darken-4"}) 
+           history.push('/login')
+            }
         })
     }
      return(
