@@ -1,6 +1,45 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 const LOGIN =()=>{
+     const history = useHistory()
+ 
+     const [password,setpassword]=useState("")
+     const [email,setemail]= useState("")
+  
+     const PostData =()=>{
+         if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
+         {
+     M.toast({html:"invalid email",classes:"#c62828 red darken-3"})
+     return
+         }
+         fetch("/signup",{
+             method:"post",
+             headers:{
+                 "Content-Type":"application/json"
+             },
+             body:JSON.stringify({
+                
+                 password:password,
+                 email:email
+             })
+ 
+         } )
+         .then(res=>res.json())
+         .then(data=>{
+            if(data.error)
+            {
+                M.toast({html:data.error,classes:"#c62828 red darken-3"})
+            }
+            else
+            {
+               M.toast({html:data.message,classes:"#1b5e20 green darken-4"}) 
+            history.push('/')
+             }
+         }).catch(err=>{
+             console.log(err)
+         })
+     }
+
      return(
       <div className="mycard">
             <div className="card auth-card input-field ">
@@ -9,12 +48,17 @@ const LOGIN =()=>{
        </h2>
        <input
        type ="text"
-       placeholder="email"/>
+       placeholder="email"
+       value ={email}
+       onChange={(e)=>setemail(e.target.value)} />
         <input
        type ="text"
-       placeholder="password"/>
+       placeholder="password"
+       value ={password}
+       onChange={(e)=>setpassword(e.target.value)} 
+       />
 
-  <button className="btn waves-effect waves-light #64b5f6 blue lighten-2" >Login
+  <button className="btn waves-effect waves-light #64b5f6 blue lighten-2" onClick ={()=>PostData()} >Login
   
   </button>
   <h5>
