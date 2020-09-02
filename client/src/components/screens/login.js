@@ -1,5 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link,useHistory} from 'react-router-dom'
+import M from 'materialize-css'
+
 const LOGIN =()=>{
      const history = useHistory()
  
@@ -12,7 +14,7 @@ const LOGIN =()=>{
      M.toast({html:"invalid email",classes:"#c62828 red darken-3"})
      return
          }
-         fetch("/signup",{
+         fetch("/signin",{
              method:"post",
              headers:{
                  "Content-Type":"application/json"
@@ -26,13 +28,14 @@ const LOGIN =()=>{
          } )
          .then(res=>res.json())
          .then(data=>{
+            console.log(data)  
             if(data.error)
             {
                 M.toast({html:data.error,classes:"#c62828 red darken-3"})
             }
             else
             {
-               M.toast({html:data.message,classes:"#1b5e20 green darken-4"}) 
+               M.toast({html:"signed in successfully",classes:"#1b5e20 green darken-4"}) 
             history.push('/')
              }
          }).catch(err=>{
