@@ -1,13 +1,46 @@
 import React,{useState,useEffect} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import M from 'materialize-css'
+
 const CreatePost = ()=>{
     const history = useHistory()
     const [title,settitle]= useState("")
     const [body,setbody]=useState("")
     const [image,setimage]= useState("")
     const [url,seturl]=useState("")
- 
+    useEffect(()=>{
+        if(url)
+        {
+            fetch("/createpost",{
+                method:"post",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer "+localStorage.getItem("jwt")
+                },
+                body:JSON.stringify({
+                  title,
+                  body,
+                  pic:url
+                })
+        
+            } )
+            .then(res=>res.json())
+            .then(data=>{
+               if(data.error)
+               {
+                   M.toast({html:data.error,classes:"#c62828 red darken-3"})
+               }
+               else
+               {
+                  M.toast({html:"Created post Successful",classes:"#1b5e20 green darken-4"}) 
+               history.push('/')
+                }
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+    
+    },[url] )
    const postDetails =()=>{
        const data = new FormData()
        data.append("file",image)
@@ -24,33 +57,7 @@ const CreatePost = ()=>{
        .catch(err=>{
            console.log(err)
        })
-       fetch("/createpost",{
-        method:"post",
-        headers:{
-            "Content-Type":"application/json",
-            "Authorization":"Bearer "+localStorage.getItem("jwt")
-        },
-        body:JSON.stringify({
-          title,
-          body,
-          pic:url
-        })
 
-    } )
-    .then(res=>res.json())
-    .then(data=>{
-       if(data.error)
-       {
-           M.toast({html:data.error,classes:"#c62828 red darken-3"})
-       }
-       else
-       {
-          M.toast({html:"Created post Successful",classes:"#1b5e20 green darken-4"}) 
-       history.push('/')
-        }
-    }).catch(err=>{
-        console.log(err)
-    })
        
    }
 
