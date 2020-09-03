@@ -17,12 +17,13 @@ export const Routing = () =>{
     const user = JSON.parse(localStorage.getItem("user"))
   if(user)
   {
-    
+ 
     history.push('/')
   }
   else
   {
-    history.login('/login')
+    console.log(user)
+    history.push('/login')
   }
   },[])
   return (   
