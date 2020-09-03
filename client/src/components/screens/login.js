@@ -35,6 +35,8 @@ const LOGIN =()=>{
             }
             else
             {
+                localStorage.setItem("jwt",data.token)
+                localStorage.setItem("user",JSON.stringify( data.user))
                M.toast({html:"signed in successfully",classes:"#1b5e20 green darken-4"}) 
             history.push('/')
              }
