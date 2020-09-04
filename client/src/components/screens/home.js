@@ -10,6 +10,7 @@ fetch('/allpost',{
     }
 }).then(res=>res.json())
 .then(result=>{
+    console.log(result)
     setdata(result.posts)
 
 })
