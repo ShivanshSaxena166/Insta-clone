@@ -56,11 +56,11 @@ const LOGIN =()=>{
        </h2>
        <input
        type ="text"
-       placeholder="email"
+       placeholder="username"
        value ={email}
        onChange={(e)=>setemail(e.target.value)} />
         <input
-       type ="text"
+       type ="password"
        placeholder="password"
        value ={password}
        onChange={(e)=>setpassword(e.target.value)} 
