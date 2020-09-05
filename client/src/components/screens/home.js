@@ -80,6 +80,21 @@ return item
  
      }
 
+     const makeComment = (text,postId) =>{
+
+        fetch('/comment',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                postId,
+                text
+            })
+        })
+
+     }
      return(
          <div className="home">
 
@@ -112,7 +127,15 @@ return item
                 <h6>
                   {item.body}
                 </h6>
-                <input type="text" placeholder="add a comment" />
+<form onSubmit={(e)=>{
+    e.preventDefault()
+    makeComment(e.target[0].value)
+}}>
+<input type="text" placeholder="add a comment" />
+
+</form>
+
+                
             </div>
             
                    </div>
