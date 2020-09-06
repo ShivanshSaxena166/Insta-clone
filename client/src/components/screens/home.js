@@ -92,6 +92,25 @@ return item
                 postId,
                 text
             })
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            const newData = data.map(item=>{
+                if(item._id==result._id)
+                {
+                    return result
+                }
+                else{
+ return item
+                }
+              
+ 
+            }
+            )
+            setdata(newData)
+        }).catch(err=>{
+            console.log(err)
+
         })
 
      }
@@ -127,9 +146,17 @@ return item
                 <h6>
                   {item.body}
                 </h6>
+                {
+                    item.comments.map(record=>{
+                        return(
+                        <h6 key={record._id} > <span style={{fontWeight:"500"}}> {record.postedBy.name}</span> {record.text}</h6>
+
+                        )
+                    })
+                }
 <form onSubmit={(e)=>{
     e.preventDefault()
-    makeComment(e.target[0].value)
+    makeComment(e.target[0].value,item._id)
 }}>
 <input type="text" placeholder="add a comment" />
 
