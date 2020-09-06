@@ -109,7 +109,7 @@ router.delete("/deletepost/:postId",requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.postId})
     .populate("postedBy","_id")
     .exec((err,post)=>{
-        if(err||post)
+        if(err||!post)
         {
             return res.status(422).json({error:err})
         }
@@ -118,7 +118,7 @@ router.delete("/deletepost/:postId",requireLogin,(req,res)=>{
         {
 post.remove()
 .then(result=>{
-    res.json({message:"successfully deleted"})
+    res.json(result)
 }).catch(err=>{
     console.log(err)
 })
