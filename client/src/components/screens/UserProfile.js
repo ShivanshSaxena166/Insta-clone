@@ -1,6 +1,7 @@
 import React,{useEffect,useState,useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 const Profile  = ()=>{
     const [userProfile,setProfile] = useState(null)
     
@@ -39,7 +40,7 @@ const Profile  = ()=>{
                    />
                </div>
                <div>
-                   <h4>{userProfile.user.name}</h4>
+                   <h4>  {userProfile.user.name}</h4>
                    <h5>{userProfile.user.email}</h5>
                    <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                        <h6> posts</h6>
