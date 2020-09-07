@@ -6,15 +6,21 @@ const Post = require('./../models/post')
 const User = require('./../models/user')
 router.get('/user/:id', requireLogin, (req,res)=>{
     User.findOne({_id:req.params.id})
-    .select(".password")
+    .populate("users","name email")
+    .select("-password")
+   
     .then(user=>{
         Post.find({postedBy:req.params.id})
         .populate("postedBy","_id name")
+        
+        
         .exec((err,posts)=>{
            if(err)
            {
                return res.status(422).json({error:err})
-           } 
+           }
+           console.log(user) 
+           
            res.json({user,posts})
         })
     })
