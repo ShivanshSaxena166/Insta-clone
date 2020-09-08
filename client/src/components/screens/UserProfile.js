@@ -38,7 +38,12 @@ const followUser =()=>{
         dispatch({type:"UPDATE",payload:{following:data.following,followers:data.followers}})
         localStorage.setItem("user",JSON.stringify(data))
       
-        console.log(data)
+        setProfile((prevState)=>{
+            return{
+                ...prevState,
+                user:data
+            }
+        })
     })
 
 }
