@@ -77,6 +77,7 @@ const unfollowUser =()=>{
                 followers:newFollower}
             }
         })
+        setShowFollow(true)
     })
 
 }

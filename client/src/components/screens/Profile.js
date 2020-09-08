@@ -32,7 +32,12 @@ const{state,dispatch}=useContext(UserContext)
 <div>
     <h4>
       {state?state.name:"loading"}
+     
     </h4>
+<h4>
+{state?state.email:"0"}
+</h4>
+
     <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
         <h6> {mypics.length} posts</h6>
         <h6>{state?state.followers.length:"0" } followers</h6>
