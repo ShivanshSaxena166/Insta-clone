@@ -4,10 +4,11 @@ import {useParams} from 'react-router-dom'
 import {Link} from 'react-router-dom'
 const Profile  = ()=>{
     const [userProfile,setProfile] = useState(null)
-    const[showfollow,setShowFollow]=useState(true)
+    
     
     const {state,dispatch} = useContext(UserContext)
     const {userid} = useParams()
+    const[showfollow,setShowFollow]=useState(state?!state.following.includes(userid):true)
 
     useEffect(()=>{
        fetch(`/user/${userid}`,{
@@ -98,6 +99,7 @@ const unfollowUser =()=>{
                    src={userProfile.user.pic}
   
                    />
+                   {console.log(userProfile.user)}
                </div>
                <div>
                    <h4>  {userProfile.user.name}</h4>
