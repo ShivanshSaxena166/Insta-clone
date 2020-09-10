@@ -45,7 +45,8 @@ return
         body:JSON.stringify({
             name:name,
             password:password,
-            email:email
+            email:email,
+            pic:url
         })
 
     } )

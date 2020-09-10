@@ -14,7 +14,7 @@ router.get('/',(req,res)=>{
     res.send("hello")
 })
 router.post('/signup',(req,res)=>{
-    const {name,email,password} =req.body
+    const {name,email,password,pic} =req.body
     console.log(req.body)
     if(!email||!password||!name)
     {
@@ -35,7 +35,8 @@ User.findOne({email:email})
             email,
             password:hashedpassword,
     
-            name
+            name,
+            pic
         })
         user.save()
         .then(
@@ -69,8 +70,8 @@ router.post('/signin',(req,res)=>{
             {
                 // res.json({message:"signed in successfully"})
             const token = jwt.sign({_id:savedUser.id},JWT_SECRET)
-            const {_id,name,email,followers,following} = savedUser
-            res.json({token,user:{_id,name,email,followers,following}})
+            const {_id,name,email,followers,following,pic} = savedUser
+            res.json({token,user:{_id,name,email,followers,following,pic}})
             }
             else
             {
