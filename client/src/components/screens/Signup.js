@@ -7,7 +7,7 @@ const SIGNIN =()=>{
     const [password,setpassword]=useState("")
     const [email,setemail]= useState("")
     const [image,setimage]= useState("")
-    const [url,seturl]=useState("")
+    const [url,seturl]=useState(undefined)
     useEffect(()=>{
 if(url)
 {
