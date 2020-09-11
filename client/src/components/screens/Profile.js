@@ -28,6 +28,9 @@ const{state,dispatch}=useContext(UserContext)
     <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
     src={state?state.pic:"loading"}
     />
+     <button className="btn waves-effect waves-light #64b5f6 blue lighten-2" >Update
+  
+  </button>
 </div>
 <div>
     <h4>
