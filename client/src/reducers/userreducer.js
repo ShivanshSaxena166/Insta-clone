@@ -16,6 +16,13 @@ if(action.type=="UPDATE"){
 
     }
 }
+if(action.type=="UPDATEPIC")
+{
+    return{
+        ...state,
+        pic:action.payload
+    }
+}
 return state
 
 }

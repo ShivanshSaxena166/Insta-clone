@@ -2,6 +2,8 @@ import React,{useEffect,useState,useContext} from 'react';
 import {UserContext} from '../../App'
 const Profile =()=>{
     const [mypics,setPics] = useState([])
+    const [image,setimage]= useState("")
+    const [url,seturl]=useState("")
 const{state,dispatch}=useContext(UserContext)
     useEffect(()=>{
       
@@ -15,6 +17,38 @@ const{state,dispatch}=useContext(UserContext)
           setPics(result.mypost)
         })
     },[])
+
+useEffect(()=>{
+if(image)
+{
+    const data = new FormData()
+    data.append("file",image)
+    data.append("upload_preset","insta-clone")
+    data.append("cloud_name","cnq")
+    fetch("	https://api.cloudinary.com/v1_1/insta1/image/upload",{
+        method:"post",
+        body:data
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        seturl(data.url)
+        console.log(data)
+        localStorage.setItem("user",JSON.stringify({...state,pic:data.url}))
+        dispatch({type:"UPDATEPIC",payload:data.url})
+        window.location.reload()
+
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+
+}
+},[image])    
+
+const updatePhoto =(file)=>{
+    setimage(file)
+
+}
 
     return (
         <div style={{maxWidth:"550px",margin:"0px auto"}}>
@@ -50,7 +84,7 @@ const{state,dispatch}=useContext(UserContext)
              <div className="file-field input-field" style={{margin:"10px"}}>
              <div className="btn #64b5f6 blue darken-1">
                  <span>Update pic</span>
-                 <input type="file" />
+                 <input type="file" onChange={(e)=>updatePhoto(e.target.files[0])} />
              </div>
              <div className="file-path-wrapper">
                  <input className="file-path validate" type="text" />
